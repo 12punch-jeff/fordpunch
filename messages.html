@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 Messages for Ford!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
+        }
+        
+        .messages-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .message-form-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .message-form-card h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #db2777;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #f0abfc;
+            border-radius: 15px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #db2777;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.4rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(219, 39, 119, 0.4);
+        }
+        
+        /* Messages Display */
+        .messages-wall {
+            margin-top: 30px;
+        }
+        
+        .messages-wall h2 {
+            font-family: 'Fredoka One', cursive;
+            color: white;
+            text-align: center;
+            font-size: 2rem;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        
+        .message-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            transform: rotate(-1deg);
+        }
+        
+        .message-card:nth-child(even) {
+            transform: rotate(1deg);
+        }
+        
+        .message-card::before {
+            content: '📌';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .message-card .from {
+            font-family: 'Fredoka One', cursive;
+            color: #db2777;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .message-card .relation {
+            font-family: 'Nunito', sans-serif;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .message-card .text {
+            font-family: 'Nunito', sans-serif;
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 15px;
+            padding: 15px;
+            background: #fdf2f8;
+            border-radius: 10px;
+        }
+        
+        .message-card .date {
+            font-family: 'Nunito', sans-serif;
+            color: #aaa;
+            font-size: 0.85rem;
+            text-align: right;
+            margin-top: 10px;
+        }
+        
+        .no-messages {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+        }
+        
+        .emoji-picker {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .emoji-picker button {
+            font-size: 1.5rem;
+            padding: 8px 12px;
+            border: 2px solid #f0abfc;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .emoji-picker button:hover {
+            transform: scale(1.2);
+            border-color: #db2777;
+        }
+        
+        .emoji-picker button.selected {
+            border-color: #db2777;
+            background: #fdf2f8;
+        }
+        
+        /* Success message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .success-message h3 {
+            font-family: 'Fredoka One', cursive;
+            color: #22c55e;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .success-message p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <a href="index.html" class="back-btn">🏠 Back Home</a>
+        
+        <header class="page-header">
+            <h1>💌 Messages for Ford! 💌</h1>
+            <p class="tagline">Leave a note for Ford to read!</p>
+        </header>
+
+        <div class="messages-container">
+            <!-- Message Form -->
+            <div class="message-form-card">
+                <h2>✉️ Write a Message!</h2>
+                <form id="messageForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label>👤 Your Name</label>
+                        <input type="text" name="name" placeholder="Who is this from?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>👪 How do you know Ford?</label>
+                        <select name="relation" required>
+                            <option value="">Choose one...</option>
+                            <option value="family">Family</option>
+                            <option value="friend">Friend</option>
+                            <option value="classmate">Classmate</option>
+                            <option value="neighbor">Neighbor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>💬 Your Message</label>
+                        <textarea name="message" placeholder="Write something nice for Ford!" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>😊 Pick an Emoji!</label>
+                        <div class="emoji-picker">
+                            <button type="button" onclick="selectEmoji('⭐')">⭐</button>
+                            <button type="button" onclick="selectEmoji('❤️')">❤️</button>
+                            <button type="button" onclick="selectEmoji('🎉')">🎉</button>
+                            <button type="button" onclick="selectEmoji('🦖')">🦖</button>
+                            <button type="button" onclick="selectEmoji('🏴‍☠️')">🏴‍☠️</button>
+                            <button type="button" onclick="selectEmoji('⚽')">⚽</button>
+                            <button type="button" onclick="selectEmoji('🎨')">🎨</button>
+                            <button type="button" onclick="selectEmoji('🌈')">🌈</button>
+                        </div>
+                        <input type="hidden" name="emoji" id="selectedEmoji" value="⭐">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">📬 Send Message!</button>
+                </form>
+                
+                <div class="success-message" id="successMessage">
+                    <h3>🎉 Message Sent!</h3>
+                    <p>Thanks for writing to Ford! He'll read it soon.</p>
+                </div>
+            </div>
+
+            <!-- Messages Wall -->
+            <div class="messages-wall">
+                <h2>📝 Message Board 📝</h2>
+                
+                <!-- Example messages - Brian can add real ones here -->
+                <div class="message-card">
+                    <div class="from">💫 From: Grandma</div>
+                    <div class="relation">Family</div>
+                    <div class="text">
+                        Happy almost birthday, Ford! 🎂 I love you so much and can't wait to see you become a big 5-year-old! You're the best grandson ever!
+                    </div>
+                    <div class="date">💕</div>
+                </div>
+                
+                <div class="message-card">
+                    <div class="from">🏴‍☠️ From: Captain Jack</div>
+                    <div class="relation">Friend</div>
+                    <div class="text">
+                        Ahoy, young pirate! I heard ye be having a pirate party! Save some treasure for me! Arrr! 🦜
+                    </div>
+                    <div class="date">⚓</div>
+                </div>
+
+                <!-- Add more messages here as they come in -->
+                
+            </div>
+        </div>
+
+        <footer>
+            <p>💌 Ford loves reading your messages! 💌</p>
+        </footer>
+    </div>
+
+    <script src="js/sparkles.js"></script>
+    <script>
+        function selectEmoji(emoji) {
+            document.getElementById('selectedEmoji').value = emoji;
+            document.querySelectorAll('.emoji-picker button').forEach(btn => {
+                btn.classList.remove('selected');
+                if (btn.textContent === emoji) {
+                    btn.classList.add('selected');
+                }
+            });
+        }
+        
+        // Select first emoji by default
+        document.querySelector('.emoji-picker button').classList.add('selected');
+        
+        // Handle form submission (Formspree redirect)
+        const form = document.getElementById('messageForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        // If using fetch instead of redirect:
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    alert('Oops! Something went wrong. Try again!');
+                }
+            } catch (error) {
+                alert('Oops! Something went wrong. Try again!');
+            }
+        });
+    </script>
+</body>
+</html>
