@@ -156,7 +156,7 @@
                 Join us for treasure hunts, pirate games, and lots of fun!
             </p>
             
-            <a href="mailto:?subject=RSVP%20for%20Ford's%20Pirate%20Party!" class="rsvp-btn">
+            <a href="#rsvp" class="rsvp-btn">
                 ⚓ RSVP for the Adventure! ⚓
             </a>
         </div>
@@ -187,11 +187,87 @@
             </div>
         </div>
 
+        <!-- RSVP Form -->
+        <div class="invite-card" id="rsvp" style="background: linear-gradient(135deg, #f4e4bc 0%, #e8d5a3 100%);">
+            <h2 style="color: #8B4513;">⚓ RSVP Here! ⚓</h2>
+            <p style="text-align: center; color: #5c3317; margin-bottom: 20px;">Please respond by March 22nd</p>
+            
+            <form id="rsvpForm" action="https://formspree.io/f/xaqdypeq" method="POST" style="max-width: 400px; margin: 0 auto;">
+                <input type="hidden" name="_subject" value="🏴‍☠️ RSVP for Ford's Pirate Party!">
+                <input type="hidden" name="form_type" value="RSVP">
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Parent's Name</label>
+                    <input type="text" name="parent_name" required style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Child's Name</label>
+                    <input type="text" name="child_name" required style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Will ye be joining us?</label>
+                    <select name="attending" required style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
+                        <option value="">Select...</option>
+                        <option value="yes">Aye! We'll be there! 🏴‍☠️</option>
+                        <option value="no">Nay, we can't make it 😢</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">How many pirates? (kids + adults)</label>
+                    <input type="number" name="guest_count" min="1" max="10" placeholder="e.g. 3" style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Any allergies or notes?</label>
+                    <textarea name="notes" rows="3" placeholder="Optional - let us know!" style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif; resize: vertical;"></textarea>
+                </div>
+                
+                <button type="submit" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #FFD700, #FFA500); border: 4px solid #8B4513; border-radius: 15px; font-family: 'Pirata One', cursive; font-size: 1.5rem; color: #4a3728; cursor: pointer; transition: transform 0.3s;">
+                    🏴‍☠️ Send RSVP! 🏴‍☠️
+                </button>
+            </form>
+            
+            <div id="rsvpSuccess" style="display: none; text-align: center; padding: 30px;">
+                <div style="font-size: 4rem;">🎉</div>
+                <h3 style="font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.8rem;">Thanks, Matey!</h3>
+                <p style="color: #5c3317;">We got yer RSVP. See ye on the ship!</p>
+            </div>
+        </div>
+
         <footer>
             <p style="color: #FFD700;">⚓ Set Sail for Fun! ⚓</p>
         </footer>
     </div>
 
     <script src="js/sparkles.js"></script>
+    <script>
+        const form = document.getElementById('rsvpForm');
+        const successMsg = document.getElementById('rsvpSuccess');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
+                } else {
+                    alert('Arrr! Something went wrong. Try again, matey!');
+                }
+            } catch (error) {
+                alert('Arrr! Something went wrong. Try again, matey!');
+            }
+        });
+    </script>
 </body>
 </html>
