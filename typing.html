@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⌨️ Learn to Type with Ford!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+        }
+        
+        .game-area {
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        
+        .target-letter {
+            font-family: 'Fredoka One', cursive;
+            font-size: 12rem;
+            color: #22c55e;
+            text-shadow: 4px 4px 0 #166534;
+            animation: pulse 1s ease-in-out infinite;
+            margin: 20px 0;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .target-word {
+            font-family: 'Nunito', sans-serif;
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .target-word .highlight {
+            color: #22c55e;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+        
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 30px;
+        }
+        
+        .keyboard-row {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .key {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #e5e5e5, #d4d4d4);
+            border: 3px solid #a3a3a3;
+            border-radius: 10px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: 0 4px 0 #737373;
+        }
+        
+        .key:hover {
+            background: linear-gradient(135deg, #fef08a, #fde047);
+        }
+        
+        .key.target {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-color: #166534;
+            color: white;
+            animation: glow 1s ease-in-out infinite;
+            box-shadow: 0 4px 0 #166534, 0 0 20px #22c55e;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 4px 0 #166534, 0 0 20px #22c55e; }
+            50% { box-shadow: 0 4px 0 #166534, 0 0 40px #22c55e; }
+        }
+        
+        .key.pressed {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #737373;
+        }
+        
+        .key.correct {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            animation: celebrate 0.5s ease-out;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .key.space {
+            width: 300px;
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+        
+        .score-item {
+            text-align: center;
+        }
+        
+        .score-item .label {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .score-item .value {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.5rem;
+            color: #22c55e;
+        }
+        
+        .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .mode-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .mode-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .mode-btn.active {
+            box-shadow: 0 0 0 4px #22c55e;
+        }
+        
+        .mode-btn.letters { background: #fef08a; color: #854d0e; }
+        .mode-btn.words { background: #a5f3fc; color: #0e7490; }
+        .mode-btn.sentences { background: #fecaca; color: #991b1b; }
+        
+        .celebration {
+            font-size: 4rem;
+            animation: pop 0.5s ease-out;
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .hint {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e5e5e5;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #4ade80);
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <a href="index.html" class="back-btn">🏠 Back Home</a>
+        
+        <header class="page-header">
+            <h1>⌨️ Learn to Type! ⌨️</h1>
+            <p class="tagline">Find the letter and press it!</p>
+        </header>
+
+        <div class="game-area">
+            <div class="mode-buttons">
+                <button class="mode-btn letters active" onclick="setMode('letters')">🔤 Letters</button>
+                <button class="mode-btn words" onclick="setMode('words')">📝 Words</button>
+                <button class="mode-btn sentences" onclick="setMode('sentences')">📖 Sentences</button>
+            </div>
+            
+            <div class="score-board">
+                <div class="score-item">
+                    <div class="label">Score</div>
+                    <div class="value" id="score">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="label">Streak</div>
+                    <div class="value" id="streak">0 🔥</div>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 0%"></div>
+            </div>
+            
+            <div id="target-display">
+                <div class="target-letter" id="targetLetter">A</div>
+                <div class="target-word" id="targetWord">Press the letter <span class="highlight">A</span>!</div>
+            </div>
+            
+            <div id="celebration" class="celebration" style="display: none;"></div>
+            
+            <div class="keyboard" id="keyboard">
+                <div class="keyboard-row">
+                    <div class="key" data-key="Q">Q</div>
+                    <div class="key" data-key="W">W</div>
+                    <div class="key" data-key="E">E</div>
+                    <div class="key" data-key="R">R</div>
+                    <div class="key" data-key="T">T</div>
+                    <div class="key" data-key="Y">Y</div>
+                    <div class="key" data-key="U">U</div>
+                    <div class="key" data-key="I">I</div>
+                    <div class="key" data-key="O">O</div>
+                    <div class="key" data-key="P">P</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key" data-key="A">A</div>
+                    <div class="key" data-key="S">S</div>
+                    <div class="key" data-key="D">D</div>
+                    <div class="key" data-key="F">F</div>
+                    <div class="key" data-key="G">G</div>
+                    <div class="key" data-key="H">H</div>
+                    <div class="key" data-key="J">J</div>
+                    <div class="key" data-key="K">K</div>
+                    <div class="key" data-key="L">L</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key" data-key="Z">Z</div>
+                    <div class="key" data-key="X">X</div>
+                    <div class="key" data-key="C">C</div>
+                    <div class="key" data-key="V">V</div>
+                    <div class="key" data-key="B">B</div>
+                    <div class="key" data-key="N">N</div>
+                    <div class="key" data-key="M">M</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key space" data-key=" ">SPACE</div>
+                </div>
+            </div>
+            
+            <p class="hint" id="hint">💡 Look at the glowing key!</p>
+        </div>
+
+        <footer>
+            <p>Great job learning to type! 🌟</p>
+        </footer>
+    </div>
+
+    <script src="js/sparkles.js"></script>
+    <script>
+        // Game state
+        let score = 0;
+        let streak = 0;
+        let mode = 'letters';
+        let currentTarget = '';
+        let currentIndex = 0;
+        let progress = 0;
+        
+        // Word lists (kid-friendly)
+        const words = [
+            'CAT', 'DOG', 'SUN', 'MOM', 'DAD', 'HAT', 'BAT', 'RAT', 'CAR', 'BUS',
+            'RUN', 'FUN', 'BIG', 'RED', 'BLUE', 'FISH', 'BIRD', 'TREE', 'STAR', 'MOON',
+            'FORD', 'LOVE', 'PLAY', 'JUMP', 'SKIP', 'BALL', 'BOOK', 'CAKE', 'GAME', 'HOME'
+        ];
+        
+        const sentences = [
+            'I LOVE MOM',
+            'THE CAT RAN',
+            'A BIG DOG',
+            'I CAN RUN',
+            'THE SUN IS UP',
+            'I LIKE CAKE',
+            'PLAY WITH ME',
+            'FORD IS FUN'
+        ];
+        
+        // Sound effects (using Web Audio API)
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(freq, duration) {
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            osc.start();
+            osc.stop(audioContext.currentTime + duration);
+        }
+        
+        function playCorrect() {
+            playSound(523.25, 0.1); // C5
+            setTimeout(() => playSound(659.25, 0.1), 100); // E5
+            setTimeout(() => playSound(783.99, 0.2), 200); // G5
+        }
+        
+        function playWrong() {
+            playSound(200, 0.3);
+        }
+        
+        function playCelebration() {
+            [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                setTimeout(() => playSound(freq, 0.15), i * 100);
+            });
+        }
+        
+        // Get all keys
+        const keys = document.querySelectorAll('.key');
+        const targetLetter = document.getElementById('targetLetter');
+        const targetWord = document.getElementById('targetWord');
+        const scoreEl = document.getElementById('score');
+        const streakEl = document.getElementById('streak');
+        const celebrationEl = document.getElementById('celebration');
+        const progressEl = document.getElementById('progress');
+        const hintEl = document.getElementById('hint');
+        
+        function setMode(newMode) {
+            mode = newMode;
+            currentIndex = 0;
+            progress = 0;
+            
+            // Update buttons
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.classList.contains(newMode)) btn.classList.add('active');
+            });
+            
+            nextTarget();
+        }
+        
+        function nextTarget() {
+            // Clear previous target highlighting
+            keys.forEach(k => k.classList.remove('target'));
+            
+            if (mode === 'letters') {
+                currentTarget = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                targetLetter.textContent = currentTarget;
+                targetWord.innerHTML = `Press the letter <span class="highlight">${currentTarget}</span>!`;
+                hintEl.textContent = `💡 Find the ${currentTarget} key!`;
+            } else if (mode === 'words') {
+                currentTarget = words[Math.floor(Math.random() * words.length)];
+                currentIndex = 0;
+                updateWordDisplay();
+            } else if (mode === 'sentences') {
+                currentTarget = sentences[Math.floor(Math.random() * sentences.length)];
+                currentIndex = 0;
+                updateWordDisplay();
+            }
+            
+            highlightTargetKey();
+        }
+        
+        function updateWordDisplay() {
+            const letter = currentTarget[currentIndex];
+            targetLetter.textContent = letter === ' ' ? '␣' : letter;
+            
+            let display = '';
+            for (let i = 0; i < currentTarget.length; i++) {
+                if (i < currentIndex) {
+                    display += `<span style="color: #22c55e;">${currentTarget[i]}</span>`;
+                } else if (i === currentIndex) {
+                    display += `<span class="highlight">${currentTarget[i] === ' ' ? '␣' : currentTarget[i]}</span>`;
+                } else {
+                    display += currentTarget[i];
+                }
+            }
+            targetWord.innerHTML = display;
+            hintEl.textContent = currentTarget[currentIndex] === ' ' ? '💡 Press SPACE!' : `💡 Find the ${currentTarget[currentIndex]} key!`;
+        }
+        
+        function highlightTargetKey() {
+            const target = mode === 'letters' ? currentTarget : currentTarget[currentIndex];
+            keys.forEach(key => {
+                if (key.dataset.key === target) {
+                    key.classList.add('target');
+                }
+            });
+        }
+        
+        function handleKeyPress(pressedKey) {
+            const target = mode === 'letters' ? currentTarget : currentTarget[currentIndex];
+            
+            if (pressedKey === target) {
+                // Correct!
+                playCorrect();
+                
+                const keyEl = document.querySelector(`.key[data-key="${pressedKey}"]`);
+                if (keyEl) {
+                    keyEl.classList.add('correct');
+                    setTimeout(() => keyEl.classList.remove('correct'), 500);
+                }
+                
+                if (mode === 'letters') {
+                    score += 10;
+                    streak++;
+                    progress = Math.min(100, progress + 10);
+                    
+                    if (progress >= 100) {
+                        celebrate();
+                        progress = 0;
+                    }
+                    
+                    setTimeout(nextTarget, 500);
+                } else {
+                    currentIndex++;
+                    progress = (currentIndex / currentTarget.length) * 100;
+                    
+                    if (currentIndex >= currentTarget.length) {
+                        // Word/sentence complete!
+                        score += currentTarget.length * 5;
+                        streak++;
+                        celebrate();
+                        setTimeout(nextTarget, 1500);
+                    } else {
+                        updateWordDisplay();
+                        highlightTargetKey();
+                    }
+                }
+            } else {
+                // Wrong
+                playWrong();
+                streak = 0;
+            }
+            
+            scoreEl.textContent = score;
+            streakEl.textContent = streak + ' 🔥';
+            progressEl.style.width = progress + '%';
+        }
+        
+        function celebrate() {
+            playCelebration();
+            const emojis = ['🎉', '⭐', '🌟', '🎊', '✨', '🏆', '👏', '💯'];
+            celebrationEl.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            celebrationEl.style.display = 'block';
+            setTimeout(() => celebrationEl.style.display = 'none', 1000);
+        }
+        
+        // Click handling for on-screen keyboard
+        keys.forEach(key => {
+            key.addEventListener('click', () => {
+                key.classList.add('pressed');
+                setTimeout(() => key.classList.remove('pressed'), 100);
+                handleKeyPress(key.dataset.key);
+            });
+        });
+        
+        // Physical keyboard handling
+        document.addEventListener('keydown', (e) => {
+            const pressedKey = e.key.toUpperCase();
+            const keyEl = document.querySelector(`.key[data-key="${pressedKey}"]`);
+            
+            if (keyEl || e.key === ' ') {
+                e.preventDefault();
+                if (keyEl) {
+                    keyEl.classList.add('pressed');
+                    setTimeout(() => keyEl.classList.remove('pressed'), 100);
+                }
+                handleKeyPress(e.key === ' ' ? ' ' : pressedKey);
+            }
+        });
+        
+        // Initialize
+        nextTarget();
+    </script>
+</body>
+</html>

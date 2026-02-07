@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Ford's Art Gallery!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 50%, #be185d 100%);
+        }
+        
+        .gallery-intro {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        
+        .gallery-intro h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #be185d;
+            font-size: 2rem;
+        }
+        
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .art-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .art-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .art-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        .art-info {
+            padding: 20px;
+        }
+        
+        .art-info h3 {
+            font-family: 'Fredoka One', cursive;
+            color: #333;
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+        }
+        
+        .art-info p {
+            color: #666;
+            margin: 0 0 15px 0;
+        }
+        
+        .art-price {
+            display: inline-block;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+        }
+        
+        .buy-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .buy-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .sold-badge {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        
+        .artist-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #78350f;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            margin: 20px 0;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <a href="index.html" class="back-btn">🏠 Back Home</a>
+        
+        <header class="page-header">
+            <h1>🎨 Ford's Art Gallery! 🎨</h1>
+            <p class="tagline">Original artwork by a young artist!</p>
+        </header>
+
+        <div class="gallery-intro">
+            <span class="artist-badge">⭐ Artist: Ford Punch, Age 4 ⭐</span>
+            <h2>Welcome to Ford's Art Gallery!</h2>
+            <p style="font-size: 1.2rem; color: #666;">
+                Every piece is a one-of-a-kind original masterpiece! 
+                All artwork is hand-drawn with crayons, markers, and lots of creativity.
+            </p>
+            <p style="font-size: 1rem; color: #999;">
+                Contact us to purchase original artwork — each piece ships framed!
+            </p>
+        </div>
+
+        <div class="art-grid">
+            <!-- Artwork 1 - SOLD -->
+            <div class="art-card">
+                <img src="art/artwork-1.jpg" alt="Ocean Dreams" class="art-image" onclick="openLightbox(this)">
+                <div class="art-info">
+                    <h3>🌊 Ocean Dreams</h3>
+                    <p>Mixed media on paper, 2026</p>
+                    <p style="font-style: italic; color: #888;">"Blue clouds over a green forest"</p>
+                    <span class="art-price">$20</span>
+                    <br>
+                    <span class="sold-badge">🎉 SOLD!</span>
+                </div>
+            </div>
+            
+            <!-- Artwork 2 -->
+            <div class="art-card">
+                <img src="art/artwork-2.jpg" alt="Garden Party" class="art-image" onclick="openLightbox(this)">
+                <div class="art-info">
+                    <h3>🌿 Garden Party</h3>
+                    <p>Crayon & marker on paper, 2026</p>
+                    <p style="font-style: italic; color: #888;">"A party in the jungle"</p>
+                    <span class="art-price">$20</span>
+                    <br>
+                    <a href="mailto:?subject=I%20want%20to%20buy%20Ford's%20art%20-%20Garden%20Party!" class="buy-btn">🛒 Buy Now!</a>
+                </div>
+            </div>
+            
+            <!-- Artwork 3 -->
+            <div class="art-card">
+                <img src="art/artwork-3.jpg" alt="The Nest" class="art-image" onclick="openLightbox(this)">
+                <div class="art-info">
+                    <h3>🪺 The Nest</h3>
+                    <p>Crayon on paper, 2026</p>
+                    <p style="font-style: italic; color: #888;">"A cozy bird's nest in purple sky"</p>
+                    <span class="art-price">$20</span>
+                    <br>
+                    <a href="mailto:?subject=I%20want%20to%20buy%20Ford's%20art%20-%20The%20Nest!" class="buy-btn">🛒 Buy Now!</a>
+                </div>
+            </div>
+            
+            <!-- Artwork 4 -->
+            <div class="art-card">
+                <img src="art/artwork-4.jpg" alt="Dinosaur Party" class="art-image" onclick="openLightbox(this)">
+                <div class="art-info">
+                    <h3>🦕 Dinosaur Party</h3>
+                    <p>Mixed media on paper, 2026</p>
+                    <p style="font-style: italic; color: #888;">"Dinosaurs celebrating with friends"</p>
+                    <span class="art-price">$20</span>
+                    <br>
+                    <a href="mailto:?subject=I%20want%20to%20buy%20Ford's%20art%20-%20Dinosaur%20Party!" class="buy-btn">🛒 Buy Now!</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-intro">
+            <h2>🖼️ Commission a Custom Piece!</h2>
+            <p style="font-size: 1.1rem; color: #666;">
+                Want Ford to draw something special for you? 
+                Request a custom artwork for $25!
+            </p>
+            <p style="font-size: 1rem; color: #888;">
+                Tell us what you'd like (dinosaurs, trucks, rainbows, family portraits...)
+            </p>
+            <a href="mailto:?subject=Custom%20Art%20Request%20for%20Ford!" class="buy-btn" style="font-size: 1.3rem;">
+                ✉️ Request Custom Art
+            </a>
+        </div>
+
+        <footer>
+            <p>🎨 Supporting young artists! 🎨</p>
+        </footer>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script src="js/sparkles.js"></script>
+    <script>
+        function openLightbox(img) {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

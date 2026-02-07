@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏴‍☠️ Ford's Pirate Party! 🏴‍☠️</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&family=Pirata+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .pirate-title {
+            font-family: 'Pirata One', cursive;
+            font-size: 4rem;
+            color: #FFD700;
+            text-shadow: 3px 3px 0 #000, -1px -1px 0 #8B4513;
+        }
+        
+        .invite-card {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23f4e4bc" width="100" height="100"/></svg>'), 
+                        linear-gradient(135deg, #f4e4bc 0%, #e8d5a3 100%);
+            border: 8px solid #8B4513;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .invite-card::before {
+            content: '☠️';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: #1a1a2e;
+            padding: 0 20px;
+        }
+        
+        .invite-card h2 {
+            font-family: 'Pirata One', cursive;
+            color: #8B4513;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .invite-details {
+            font-family: 'Nunito', sans-serif;
+            color: #4a3728;
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+        
+        .invite-details .label {
+            font-weight: 700;
+            color: #8B4513;
+        }
+        
+        .pirate-emoji {
+            font-size: 3rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .treasure-chest {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 5rem;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        .rsvp-btn {
+            display: block;
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: 4px solid #8B4513;
+            border-radius: 15px;
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: #4a3728;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .rsvp-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .ship {
+            font-size: 6rem;
+            text-align: center;
+            animation: sail 4s ease-in-out infinite;
+        }
+        
+        @keyframes sail {
+            0%, 100% { transform: translateX(-20px) rotate(-2deg); }
+            50% { transform: translateX(20px) rotate(2deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <a href="index.html" class="back-btn">🏠 Back Home</a>
+        
+        <header class="page-header">
+            <h1 class="pirate-title">🏴‍☠️ Ahoy, Matey! 🏴‍☠️</h1>
+            <p class="tagline" style="color: #FFD700;">Ye Be Invited to a Pirate Adventure!</p>
+        </header>
+
+        <div class="ship">⛵</div>
+
+        <div class="invite-card">
+            <h2>Captain Ford's 5th Birthday!</h2>
+            
+            <div class="pirate-emoji">🏴‍☠️ ⚓ 🦜</div>
+            
+            <div class="invite-details">
+                <p><span class="label">📅 When:</span> March 29th, 2026</p>
+                <p><span class="label">⏰ Time:</span> 11:15 AM Check-in</p>
+                <p><span class="label">📍 Where:</span> Pirates of Charleston!</p>
+                <p><span class="label">🗺️ Meet:</span> Yellow Pirate Cruise sign at La Quinta Hotel</p>
+                <p style="font-size: 1rem; color: #666;">(11 Ashley Point Drive, Charleston)</p>
+                <p><span class="label">👗 Dress Code:</span> Pirate Costumes Welcome!</p>
+            </div>
+            
+            <div class="treasure-chest">🎁</div>
+            
+            <p style="text-align: center; color: #8B4513; font-style: italic;">
+                Join us for treasure hunts, pirate games, and lots of fun!
+            </p>
+            
+            <a href="mailto:?subject=RSVP%20for%20Ford's%20Pirate%20Party!" class="rsvp-btn">
+                ⚓ RSVP for the Adventure! ⚓
+            </a>
+        </div>
+
+        <div class="content-card" style="text-align: center;">
+            <h2>🗺️ What to Expect</h2>
+            <p style="font-size: 1.5rem; line-height: 2;">
+                ⛵ Real Pirate Ship Cruise!<br>
+                🏴‍☠️ Pirate Games & Adventures<br>
+                🗺️ Treasure Hunt<br>
+                🎂 Birthday Cake<br>
+                🎈 Lots of Fun!
+            </p>
+            <a href="https://piratesofcharleston.com/" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #8B4513; color: #FFD700; border-radius: 10px; text-decoration: none; font-family: 'Pirata One', cursive; font-size: 1.2rem;">
+                ⚓ See the Pirate Ship! ⚓
+            </a>
+        </div>
+        
+        <div class="invite-card" style="background: linear-gradient(135deg, #1a365d, #2c5282); border-color: #FFD700;">
+            <h2 style="color: #FFD700;">📜 Message for Parents 📜</h2>
+            <div class="invite-details" style="color: #e2e8f0;">
+                <p>🧃 <strong>Drinks:</strong> Juice and water be provided for the young pirates!</p>
+                <p>🍺 <strong>Adults:</strong> Bring yer own beverages — ye be welcome aboard!</p>
+                <p>📍 <strong>Meet Us:</strong> Yellow Pirate Cruise sign in front o' the La Quinta hotel</p>
+                <p>🗺️ <strong>Address:</strong> 11 Ashley Point Drive, Charleston</p>
+                <p>⏰ <strong>Check-in:</strong> 11:15 AM before the ship departs</p>
+                <p>🚗 <strong>Parking:</strong> Free parkin' awaits at the marina!</p>
+            </div>
+        </div>
+
+        <footer>
+            <p style="color: #FFD700;">⚓ Set Sail for Fun! ⚓</p>
+        </footer>
+    </div>
+
+    <script src="js/sparkles.js"></script>
+</body>
+</html>

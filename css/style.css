@@ -1,0 +1,212 @@
+/* Ford's World - Main Styles */
+:root {
+    --primary: #FF6B6B;
+    --secondary: #4ECDC4;
+    --accent: #FFE66D;
+    --purple: #A855F7;
+    --blue: #3B82F6;
+    --pink: #EC4899;
+    --green: #22C55E;
+    --orange: #F97316;
+    --dark: #1a1a2e;
+    --light: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    color: var(--light);
+    text-shadow: 4px 4px 0 var(--dark), 
+                 -2px -2px 0 var(--accent);
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+/* Navigation Cards */
+.main-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.nav-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.nav-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.nav-card .emoji {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.nav-card .label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: var(--light);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+
+/* Card Colors */
+.nav-card.party { background: linear-gradient(135deg, var(--primary), #ff8e8e); }
+.nav-card.games { background: linear-gradient(135deg, var(--blue), #60a5fa); }
+.nav-card.typing { background: linear-gradient(135deg, var(--green), #4ade80); }
+.nav-card.photos { background: linear-gradient(135deg, var(--purple), #c084fc); }
+.nav-card.videos { background: linear-gradient(135deg, var(--orange), #fb923c); }
+.nav-card.art { background: linear-gradient(135deg, var(--pink), #f472b6); }
+.nav-card.music { background: linear-gradient(135deg, var(--secondary), #5eead4); }
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--light);
+    font-size: 1rem;
+}
+
+/* Page Styles */
+.page-header {
+    text-align: center;
+    padding: 30px;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: var(--accent);
+    color: var(--dark);
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    margin: 20px;
+    transition: transform 0.3s;
+}
+
+.back-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Content Cards */
+.content-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.content-card h2 {
+    font-family: 'Fredoka One', cursive;
+    color: var(--dark);
+    margin-bottom: 15px;
+}
+
+.content-card p {
+    color: #333;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .tagline { font-size: 1.2rem; }
+    .nav-card { padding: 20px 15px; }
+    .nav-card .emoji { font-size: 3rem; }
+    .nav-card .label { font-size: 1rem; }
+}
+
+/* Pirate Theme for Party Page */
+.pirate-theme {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.treasure-border {
+    border: 5px solid #FFD700;
+    position: relative;
+}
+
+.treasure-border::before {
+    content: '💎';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    font-size: 2rem;
+}
+
+.treasure-border::after {
+    content: '💰';
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    font-size: 2rem;
+}

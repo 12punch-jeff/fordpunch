@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 Ford's Music!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #4ECDC4 0%, #2dd4bf 50%, #14b8a6 100%);
+        }
+        
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .video-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .video-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .video-card h3 {
+            font-family: 'Fredoka One', cursive;
+            padding: 15px;
+            margin: 0;
+            text-align: center;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .dancing-emoji {
+            font-size: 3rem;
+            animation: dance 0.5s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        @keyframes dance {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+        
+        .section-header {
+            text-align: center;
+            margin: 30px 0 20px 0;
+        }
+        
+        .section-header h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2rem;
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <a href="index.html" class="back-btn">🏠 Back Home</a>
+        
+        <header class="page-header">
+            <h1>🎵 Music Time! 🎵</h1>
+            <p class="tagline">
+                <span class="dancing-emoji">🎸</span>
+                Ford's Favorite Songs!
+                <span class="dancing-emoji">🎤</span>
+            </p>
+        </header>
+
+        <div class="section-header">
+            <h2>⭐ Ford's Favorites ⭐</h2>
+        </div>
+
+        <div class="music-grid">
+            <!-- It's Raining Tacos -->
+            <div class="video-card">
+                <h3>🌮 It's Raining Tacos! 🌮</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/npjF032TDDQ" 
+                            title="It's Raining Tacos"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Chicken Wing Song / Banana -->
+            <div class="video-card">
+                <h3>🐔🍌 Chicken Wing + Banana! 🐔🍌</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/HlBYdiXdUa8" 
+                            title="Chicken Wing Banana"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Happy - Pharrell -->
+            <div class="video-card">
+                <h3>😊 Happy - Pharrell! 😊</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/ZbZSe6N_BXs" 
+                            title="Happy - Pharrell Williams"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Baby Shark -->
+            <div class="video-card">
+                <h3>🦈 Baby Shark! 🦈</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XqZsoesa55w" 
+                            title="Baby Shark"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2>🎉 Dance Party! 🎉</h2>
+        </div>
+
+        <div class="music-grid">
+            <!-- Can't Stop the Feeling -->
+            <div class="video-card">
+                <h3>💃 Can't Stop the Feeling! 💃</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/ru0K8uYEZWw" 
+                            title="Can't Stop the Feeling - Justin Timberlake"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Shake It Off -->
+            <div class="video-card">
+                <h3>🎤 Shake It Off! 🎤</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/nfWlot6h_JM" 
+                            title="Shake It Off - Taylor Swift"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Uptown Funk -->
+            <div class="video-card">
+                <h3>🕺 Uptown Funk! 🕺</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/OPf0YbXqDm0" 
+                            title="Uptown Funk - Bruno Mars"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Everything Is Awesome (Lego Movie) -->
+            <div class="video-card">
+                <h3>🧱 Everything Is Awesome! 🧱</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/StTqXEQ2l-Y" 
+                            title="Everything Is Awesome - Lego Movie"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2>🎬 Movie Songs! 🎬</h2>
+        </div>
+
+        <div class="music-grid">
+            <!-- Let It Go - Frozen -->
+            <div class="video-card">
+                <h3>❄️ Let It Go - Frozen! ❄️</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/L0MK7qz13bU" 
+                            title="Let It Go - Frozen"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- We Don't Talk About Bruno -->
+            <div class="video-card">
+                <h3>🦋 We Don't Talk About Bruno! 🦋</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/bvWRMAU6V-c" 
+                            title="We Don't Talk About Bruno - Encanto"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- You've Got a Friend in Me - Toy Story -->
+            <div class="video-card">
+                <h3>🤠 You've Got a Friend in Me! 🤠</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XHFy3YWpRx8" 
+                            title="You've Got a Friend in Me - Toy Story"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- How Far I'll Go - Moana -->
+            <div class="video-card">
+                <h3>🌊 How Far I'll Go - Moana! 🌊</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/cPAbx5kgCJo" 
+                            title="How Far I'll Go - Moana"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🎶 Keep singing and dancing! 🎶</p>
+        </footer>
+    </div>
+
+    <script src="js/sparkles.js"></script>
+</body>
+</html>

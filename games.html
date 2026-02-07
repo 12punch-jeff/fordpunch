@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Ford's Games!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .game-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .game-card h3 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            color: #333;
+            margin: 15px 0;
+        }
+        
+        .game-card .emoji {
+            font-size: 4rem;
+        }
+        
+        /* Whack-a-Mole Game */
+        .game-area {
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 20px auto;
+            display: none;
+        }
+        
+        .game-area.active {
+            display: block;
+        }
+        
+        .mole-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        
+        .mole-hole {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #854d0e, #a16207);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: transform 0.1s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mole-hole::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: #65a30d;
+            border-radius: 0 0 50% 50%;
+        }
+        
+        .mole-hole .mole {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.2s;
+            transform: translateY(100%);
+        }
+        
+        .mole-hole.active .mole {
+            transform: translateY(0);
+        }
+        
+        .mole-hole:active {
+            transform: scale(0.95);
+        }
+        
+        /* Memory Game */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .memory-card.flipped {
+            background: linear-gradient(135deg, #fef08a, #fde047);
+        }
+        
+        .memory-card.matched {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+        }
+        
+        .game-score {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2rem;
+            color: #333;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .game-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .game-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .game-btn.back {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+        }
+        
+        /* Catch Game */
+        .catch-area {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg, #87CEEB 0%, #98FB98 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+        }
+        
+        .basket {
+            position: absolute;
+            bottom: 10px;
+            font-size: 4rem;
+            transition: left 0.05s;
+        }
+        
+        .falling-item {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: fall linear forwards;
+        }
+        
+        @keyframes fall {
+            to { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <a href="index.html" class="back-btn">🏠 Back Home</a>
+        
+        <header class="page-header">
+            <h1>🎮 Games! 🎮</h1>
+            <p class="tagline">Pick a game and have fun!</p>
+        </header>
+
+        <!-- Game Selection -->
+        <div class="games-grid" id="gameSelect">
+            <div class="game-card" onclick="startGame('whack')">
+                <div class="emoji">🐹</div>
+                <h3>Whack-a-Mole!</h3>
+                <p>Tap the animals when they pop up!</p>
+            </div>
+            <div class="game-card" onclick="startGame('memory')">
+                <div class="emoji">🧠</div>
+                <h3>Memory Match</h3>
+                <p>Find the matching pairs!</p>
+            </div>
+            <div class="game-card" onclick="startGame('catch')">
+                <div class="emoji">🧺</div>
+                <h3>Catch the Fruit!</h3>
+                <p>Move the basket to catch falling fruit!</p>
+            </div>
+        </div>
+
+        <!-- Whack-a-Mole -->
+        <div class="game-area" id="whackGame">
+            <h2 style="font-family: 'Fredoka One', cursive; text-align: center;">🐹 Whack-a-Mole! 🐹</h2>
+            <div class="game-score">Score: <span id="whackScore">0</span></div>
+            <div class="game-score">Time: <span id="whackTime">30</span>s</div>
+            <div class="mole-grid" id="moleGrid">
+                <!-- Generated by JS -->
+            </div>
+            <button class="game-btn" onclick="startWhack()">▶️ Start!</button>
+            <button class="game-btn back" onclick="backToSelect()">◀️ Back</button>
+        </div>
+
+        <!-- Memory Game -->
+        <div class="game-area" id="memoryGame">
+            <h2 style="font-family: 'Fredoka One', cursive; text-align: center;">🧠 Memory Match! 🧠</h2>
+            <div class="game-score">Moves: <span id="memoryMoves">0</span></div>
+            <div class="memory-grid" id="memoryGrid">
+                <!-- Generated by JS -->
+            </div>
+            <button class="game-btn" onclick="startMemory()">🔄 New Game</button>
+            <button class="game-btn back" onclick="backToSelect()">◀️ Back</button>
+        </div>
+
+        <!-- Catch Game -->
+        <div class="game-area" id="catchGame">
+            <h2 style="font-family: 'Fredoka One', cursive; text-align: center;">🧺 Catch the Fruit! 🧺</h2>
+            <div class="game-score">Score: <span id="catchScore">0</span></div>
+            <div class="catch-area" id="catchArea">
+                <div class="basket" id="basket">🧺</div>
+            </div>
+            <button class="game-btn" onclick="startCatch()">▶️ Start!</button>
+            <button class="game-btn back" onclick="backToSelect()">◀️ Back</button>
+        </div>
+
+        <footer>
+            <p>Have fun playing! 🎈</p>
+        </footer>
+    </div>
+
+    <script src="js/sparkles.js"></script>
+    <script>
+        // Game Selection
+        function startGame(game) {
+            document.getElementById('gameSelect').style.display = 'none';
+            document.getElementById(game + 'Game').classList.add('active');
+            
+            if (game === 'memory') startMemory();
+        }
+        
+        function backToSelect() {
+            document.querySelectorAll('.game-area').forEach(g => g.classList.remove('active'));
+            document.getElementById('gameSelect').style.display = 'grid';
+            stopAllGames();
+        }
+        
+        function stopAllGames() {
+            if (whackInterval) clearInterval(whackInterval);
+            if (whackTimer) clearInterval(whackTimer);
+            if (catchInterval) clearInterval(catchInterval);
+        }
+        
+        // ==================== WHACK-A-MOLE ====================
+        let whackScore = 0;
+        let whackInterval, whackTimer;
+        const animals = ['🐹', '🐰', '🐻', '🐶', '🐱', '🦊'];
+        
+        // Create mole holes
+        const moleGrid = document.getElementById('moleGrid');
+        for (let i = 0; i < 9; i++) {
+            const hole = document.createElement('div');
+            hole.className = 'mole-hole';
+            hole.innerHTML = '<span class="mole">🐹</span>';
+            hole.onclick = () => whackMole(hole);
+            moleGrid.appendChild(hole);
+        }
+        
+        function startWhack() {
+            stopAllGames();
+            whackScore = 0;
+            document.getElementById('whackScore').textContent = '0';
+            let timeLeft = 30;
+            document.getElementById('whackTime').textContent = timeLeft;
+            
+            whackTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('whackTime').textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(whackTimer);
+                    clearInterval(whackInterval);
+                    alert(`Game Over! You scored ${whackScore} points! 🎉`);
+                }
+            }, 1000);
+            
+            whackInterval = setInterval(() => {
+                const holes = document.querySelectorAll('.mole-hole');
+                holes.forEach(h => h.classList.remove('active'));
+                
+                const randomHole = holes[Math.floor(Math.random() * holes.length)];
+                randomHole.querySelector('.mole').textContent = animals[Math.floor(Math.random() * animals.length)];
+                randomHole.classList.add('active');
+                
+                setTimeout(() => randomHole.classList.remove('active'), 800);
+            }, 1000);
+        }
+        
+        function whackMole(hole) {
+            if (hole.classList.contains('active')) {
+                whackScore += 10;
+                document.getElementById('whackScore').textContent = whackScore;
+                hole.classList.remove('active');
+                
+                // Fun feedback
+                hole.querySelector('.mole').textContent = '⭐';
+                setTimeout(() => hole.querySelector('.mole').textContent = '🐹', 200);
+            }
+        }
+        
+        // ==================== MEMORY GAME ====================
+        const memoryEmojis = ['🍎', '🍌', '🍇', '🍊', '🍓', '🍉', '🥝', '🍑'];
+        let memoryCards = [];
+        let flippedCards = [];
+        let memoryMoves = 0;
+        let canFlip = true;
+        
+        function startMemory() {
+            memoryMoves = 0;
+            document.getElementById('memoryMoves').textContent = '0';
+            flippedCards = [];
+            canFlip = true;
+            
+            // Create pairs
+            memoryCards = [...memoryEmojis, ...memoryEmojis];
+            // Shuffle
+            memoryCards.sort(() => Math.random() - 0.5);
+            
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
+            
+            memoryCards.forEach((emoji, i) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.emoji = emoji;
+                card.dataset.index = i;
+                card.textContent = '❓';
+                card.onclick = () => flipCard(card);
+                grid.appendChild(card);
+            });
+        }
+        
+        function flipCard(card) {
+            if (!canFlip || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            
+            card.classList.add('flipped');
+            card.textContent = card.dataset.emoji;
+            flippedCards.push(card);
+            
+            if (flippedCards.length === 2) {
+                memoryMoves++;
+                document.getElementById('memoryMoves').textContent = memoryMoves;
+                canFlip = false;
+                
+                if (flippedCards[0].dataset.emoji === flippedCards[1].dataset.emoji) {
+                    // Match!
+                    flippedCards.forEach(c => c.classList.add('matched'));
+                    flippedCards = [];
+                    canFlip = true;
+                    
+                    // Check win
+                    if (document.querySelectorAll('.memory-card.matched').length === memoryCards.length) {
+                        setTimeout(() => alert(`You won in ${memoryMoves} moves! 🎉`), 500);
+                    }
+                } else {
+                    // No match
+                    setTimeout(() => {
+                        flippedCards.forEach(c => {
+                            c.classList.remove('flipped');
+                            c.textContent = '❓';
+                        });
+                        flippedCards = [];
+                        canFlip = true;
+                    }, 1000);
+                }
+            }
+        }
+        
+        // ==================== CATCH GAME ====================
+        let catchScore = 0;
+        let catchInterval;
+        const fruits = ['🍎', '🍌', '🍇', '🍊', '🍓', '🍉', '🥝', '🍑', '⭐', '💎'];
+        
+        function startCatch() {
+            stopAllGames();
+            catchScore = 0;
+            document.getElementById('catchScore').textContent = '0';
+            
+            const area = document.getElementById('catchArea');
+            const basket = document.getElementById('basket');
+            
+            // Mouse/touch control
+            area.onmousemove = (e) => {
+                const rect = area.getBoundingClientRect();
+                const x = e.clientX - rect.left - 30;
+                basket.style.left = Math.max(0, Math.min(x, rect.width - 60)) + 'px';
+            };
+            
+            area.ontouchmove = (e) => {
+                const rect = area.getBoundingClientRect();
+                const x = e.touches[0].clientX - rect.left - 30;
+                basket.style.left = Math.max(0, Math.min(x, rect.width - 60)) + 'px';
+            };
+            
+            catchInterval = setInterval(() => {
+                const item = document.createElement('div');
+                item.className = 'falling-item';
+                item.textContent = fruits[Math.floor(Math.random() * fruits.length)];
+                item.style.left = Math.random() * (area.offsetWidth - 40) + 'px';
+                item.style.top = '-50px';
+                item.style.animationDuration = (2 + Math.random() * 2) + 's';
+                area.appendChild(item);
+                
+                // Check for catch
+                const checkCatch = setInterval(() => {
+                    const itemRect = item.getBoundingClientRect();
+                    const basketRect = basket.getBoundingClientRect();
+                    
+                    if (itemRect.bottom >= basketRect.top &&
+                        itemRect.left < basketRect.right &&
+                        itemRect.right > basketRect.left) {
+                        catchScore += item.textContent === '💎' ? 50 : item.textContent === '⭐' ? 20 : 10;
+                        document.getElementById('catchScore').textContent = catchScore;
+                        item.remove();
+                        clearInterval(checkCatch);
+                    }
+                    
+                    if (itemRect.top > area.getBoundingClientRect().bottom) {
+                        item.remove();
+                        clearInterval(checkCatch);
+                    }
+                }, 50);
+            }, 800);
+        }
+    </script>
+</body>
+</html>

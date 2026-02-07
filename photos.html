@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📸 Ford's Photos!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 50%, #7e22ce 100%);
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .photo-card:hover {
+            transform: scale(1.03) rotate(1deg);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        .photo-card.featured {
+            grid-column: span 2;
+        }
+        
+        .photo-card.featured img {
+            height: 350px;
+        }
+        
+        .photo-card p {
+            padding: 15px;
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 600px) {
+            .photo-card.featured {
+                grid-column: span 1;
+            }
+            .photo-card.featured img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <a href="index.html" class="back-btn">🏠 Back Home</a>
+        
+        <header class="page-header">
+            <h1>📸 My Photos! 📸</h1>
+            <p class="tagline">Pictures of Ford's adventures!</p>
+        </header>
+
+        <div class="photo-grid">
+            <!-- Featured: Busy Bug Run -->
+            <div class="photo-card featured">
+                <img src="images/ford-busy-bug.jpg" alt="Busy Bug Run" onclick="openLightbox(this)">
+                <p>⭐ Busy Bug Crew Fun Run! ⭐</p>
+            </div>
+            
+            <!-- Family Christmas -->
+            <div class="photo-card featured">
+                <img src="images/family-christmas.jpg" alt="Family Christmas" onclick="openLightbox(this)">
+                <p>🎄 Merry Christmas! 🎄</p>
+            </div>
+            
+            <!-- School Photo -->
+            <div class="photo-card">
+                <img src="images/school-photo.jpg" alt="School Photo" onclick="openLightbox(this)">
+                <p>📚 School Picture Day!</p>
+            </div>
+            
+            <!-- Golf Swing -->
+            <div class="photo-card">
+                <img src="images/golf-swing.jpg" alt="Golf Swing" onclick="openLightbox(this)">
+                <p>⛳ Future Golf Pro!</p>
+            </div>
+            
+            <!-- Siblings Hug -->
+            <div class="photo-card">
+                <img src="images/siblings-hug.jpg" alt="Siblings Hugging" onclick="openLightbox(this)">
+                <p>💕 Best Siblings!</p>
+            </div>
+            
+            <!-- Halloween Golf Cart -->
+            <div class="photo-card">
+                <img src="images/halloween-golfcart.jpg" alt="Halloween" onclick="openLightbox(this)">
+                <p>🎃 Halloween Patrol!</p>
+            </div>
+            
+            <!-- Fall Festival -->
+            <div class="photo-card">
+                <img src="images/fall-festival.jpg" alt="Fall Festival" onclick="openLightbox(this)">
+                <p>🎃 Fall Festival Fun!</p>
+            </div>
+            
+            <!-- Georgetown Fountain -->
+            <div class="photo-card">
+                <img src="images/georgetown-fountain.jpg" alt="Georgetown" onclick="openLightbox(this)">
+                <p>⛲ Downtown Day!</p>
+            </div>
+            
+            <!-- Golf Cart with Dogs -->
+            <div class="photo-card">
+                <img src="images/golfcart-dogs.jpg" alt="Golf Cart with Dogs" onclick="openLightbox(this)">
+                <p>🐕 Cruisin' with the Pups!</p>
+            </div>
+            
+            <!-- Grandma Birthday -->
+            <div class="photo-card">
+                <img src="images/grandma-birthday.jpg" alt="Birthday with Grandma" onclick="openLightbox(this)">
+                <p>🎂 Birthday Sparklers!</p>
+            </div>
+            
+            <!-- Dryer Fun -->
+            <div class="photo-card">
+                <img src="images/dryer-fun.jpg" alt="Dryer Adventures" onclick="openLightbox(this)">
+                <p>🚀 Space Capsule! 😂</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>📸 Click any photo to see it bigger! 📸</p>
+        </footer>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script src="js/sparkles.js"></script>
+    <script>
+        function openLightbox(img) {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
