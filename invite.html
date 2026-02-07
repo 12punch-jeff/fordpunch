@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Invite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a2e;
+            padding: 20px;
+        }
+        
+        .invite {
+            width: 600px;
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d5b7 50%, #dcc9a3 100%);
+            border: 12px solid #8B4513;
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 
+                0 0 0 4px #5c3317,
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 0 100px rgba(139, 69, 19, 0.1);
+        }
+        
+        .invite::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px dashed #8B4513;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .skull-header {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .title {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.8rem;
+            color: #2c1810;
+            text-align: center;
+            text-shadow: 2px 2px 0 #d4a574;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: #5c3317;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 25px;
+            border: 6px solid #8B4513;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .details {
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            color: #2c1810;
+        }
+        
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-row .icon {
+            font-size: 1.4rem;
+            width: 35px;
+            text-align: center;
+            margin-right: 12px;
+        }
+        
+        .detail-row .label {
+            font-weight: 900;
+            color: #5c3317;
+            min-width: 80px;
+        }
+        
+        .detail-row .value {
+            flex: 1;
+        }
+        
+        .adventure-text {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.4rem;
+            color: #5c3317;
+            text-align: center;
+            margin: 20px 0;
+            line-height: 1.4;
+        }
+        
+        .parent-note {
+            background: rgba(92, 51, 23, 0.1);
+            border-left: 4px solid #8B4513;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            color: #4a3728;
+        }
+        
+        .parent-note strong {
+            color: #5c3317;
+        }
+        
+        .website {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #8B4513;
+        }
+        
+        .website-label {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.9rem;
+            color: #5c3317;
+            margin-bottom: 5px;
+        }
+        
+        .website-url {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.6rem;
+            color: #2c1810;
+        }
+        
+        .corner-decor {
+            position: absolute;
+            font-size: 2rem;
+        }
+        
+        .corner-decor.tl { top: 20px; left: 25px; }
+        .corner-decor.tr { top: 20px; right: 25px; }
+        .corner-decor.bl { bottom: 20px; left: 25px; }
+        .corner-decor.br { bottom: 20px; right: 25px; }
+        
+        .rsvp {
+            text-align: center;
+            margin-top: 15px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            color: #5c3317;
+        }
+    </style>
+</head>
+<body>
+    <div class="invite">
+        <span class="corner-decor tl">⚓</span>
+        <span class="corner-decor tr">🦜</span>
+        <span class="corner-decor bl">⚔️</span>
+        <span class="corner-decor br">🏴‍☠️</span>
+        
+        <div class="skull-header">☠️</div>
+        <h1 class="title">Ye Be Invited!</h1>
+        <h2 class="subtitle">Captain Ford's 5th Birthday</h2>
+        
+        <div class="photo-frame">
+            <img src="images/ford-busy-bug.jpg" alt="Captain Ford">
+        </div>
+        
+        <p class="adventure-text">
+            🏴‍☠️ Set Sail for a Pirate Adventure! 🏴‍☠️
+        </p>
+        
+        <div class="details">
+            <div class="detail-row">
+                <span class="icon">📅</span>
+                <span class="label">Date:</span>
+                <span class="value">Saturday, March 29th, 2026</span>
+            </div>
+            <div class="detail-row">
+                <span class="icon">⏰</span>
+                <span class="label">Time:</span>
+                <span class="value">11:15 AM Check-in</span>
+            </div>
+            <div class="detail-row">
+                <span class="icon">⛵</span>
+                <span class="label">Where:</span>
+                <span class="value">Pirates of Charleston Cruise</span>
+            </div>
+            <div class="detail-row">
+                <span class="icon">📍</span>
+                <span class="label">Meet:</span>
+                <span class="value">Yellow Pirate Cruise sign at La Quinta</span>
+            </div>
+            <div class="detail-row">
+                <span class="icon">🗺️</span>
+                <span class="label">Address:</span>
+                <span class="value">11 Ashley Point Drive, Charleston</span>
+            </div>
+            <div class="detail-row">
+                <span class="icon">👗</span>
+                <span class="label">Attire:</span>
+                <span class="value">Pirate Costumes Welcome!</span>
+            </div>
+        </div>
+        
+        <div class="parent-note">
+            <strong>Ahoy, Parents!</strong> 🧃 Juice & water provided for young pirates. 
+            🍺 Bring yer own adult beverages — ye be welcome aboard! 
+            🚗 Free parking at the marina.
+        </div>
+        
+        <div class="website">
+            <div class="website-label">More details & RSVP at:</div>
+            <div class="website-url">🌐 FordPunch.com/party</div>
+        </div>
+        
+        <div class="rsvp">
+            Please RSVP by March 22nd
+        </div>
+    </div>
+</body>
+</html>
