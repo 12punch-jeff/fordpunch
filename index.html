@@ -309,11 +309,21 @@
         
         /* Responsive - Mobile: Full-bleed hero */
         @media (max-width: 700px) {
+            html, body {
+                width: 100%;
+                overflow-x: hidden;
+            }
+            
+            .stars-bg {
+                display: none;
+            }
+            
             .header {
                 position: absolute;
                 top: 0;
                 left: 0;
                 right: 0;
+                width: 100%;
                 z-index: 10;
                 padding: 40px 20px 20px;
                 background: transparent;
@@ -340,12 +350,15 @@
                 display: flex;
                 flex-direction: column;
                 padding: 0;
+                width: 100%;
+                max-width: 100%;
             }
             
             /* Mobile hero - full viewport background */
             .hero-center {
                 position: relative;
                 min-height: 100vh;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
@@ -358,11 +371,11 @@
             
             .hero-center::before {
                 content: '';
-                position: absolute;
+                position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
+                width: 100vw;
+                height: 100vh;
                 background: url('images/hero-bg.jpg') center center / cover no-repeat;
                 z-index: -2;
             }
