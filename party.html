@@ -3,246 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏴‍☠️ Ford's Pirate Party! 🏴‍☠️</title>
+    <title>Birthday Launch — Ford Punch</title>
     
-    <!-- Social Media Preview -->
-    <meta property="og:title" content="🏴‍☠️ Captain Ford's 5th Birthday Party!">
-    <meta property="og:description" content="Ahoy! Ye be invited to a pirate adventure! March 29th at Pirates of Charleston. Pirate costumes welcome!">
-    <meta property="og:image" content="https://fordpunch.com/images/ford-busy-bug.jpg">
+    <meta property="og:title" content="🚀 Captain Ford's 5th Birthday Launch!">
+    <meta property="og:description" content="Join the crew for a pirate adventure! March 29th at Pirates of Charleston.">
+    <meta property="og:image" content="https://fordpunch.com/images/hero-bg.jpg">
     <meta property="og:url" content="https://fordpunch.com/party.html">
-    <meta property="og:type" content="website">
     
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🏴‍☠️ Captain Ford's 5th Birthday Party!">
-    <meta name="twitter:description" content="Ahoy! Ye be invited to a pirate adventure! March 29th at Pirates of Charleston.">
-    <meta name="twitter:image" content="https://fordpunch.com/images/ford-busy-bug.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Pirata+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&family=Pirata+One&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(45, 27, 78, 0.5) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(224, 112, 32, 0.2) 0%, transparent 40%),
+                var(--cosmic-dark);
+        }
+        
+        .hero-section {
+            padding: 100px 20px 60px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
         .pirate-title {
             font-family: 'Pirata One', cursive;
-            font-size: 4rem;
-            color: #FFD700;
-            text-shadow: 3px 3px 0 #000, -1px -1px 0 #8B4513;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--cosmic-gold);
+            text-shadow: 0 0 40px rgba(240, 160, 48, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .mission-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--cosmic-orange), var(--cosmic-gold));
+            border-radius: 50px;
+            color: var(--cosmic-dark);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
         }
         
         .invite-card {
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23f4e4bc" width="100" height="100"/></svg>'), 
-                        linear-gradient(135deg, #f4e4bc 0%, #e8d5a3 100%);
-            border: 8px solid #8B4513;
-            border-radius: 10px;
-            padding: 40px;
-            max-width: 600px;
-            margin: 30px auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 45px;
+            max-width: 650px;
+            margin: 0 auto 30px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        
-        .invite-card::before {
-            content: '☠️';
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            background: #1a1a2e;
-            padding: 0 20px;
+            z-index: 1;
         }
         
         .invite-card h2 {
             font-family: 'Pirata One', cursive;
-            color: #8B4513;
-            font-size: 2.5rem;
+            font-size: 2rem;
+            color: var(--cosmic-gold);
             text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .detail-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+        
+        .detail-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .detail-content {
+            flex: 1;
+        }
+        
+        .detail-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--cosmic-gold);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .detail-value {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+        
+        .detail-note {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        .parent-info {
+            background: linear-gradient(135deg, rgba(45, 27, 78, 0.5), rgba(107, 63, 160, 0.3));
+            border: 1px solid rgba(107, 63, 160, 0.3);
+        }
+        
+        .parent-info h2 {
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .parent-list {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+        
+        .parent-list li {
+            display: flex;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .parent-list li strong {
+            color: var(--text-primary);
+        }
+        
+        /* RSVP Form */
+        .rsvp-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 45px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .rsvp-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--cosmic-gold);
+            text-align: center;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+        
+        .rsvp-deadline {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
             margin-bottom: 20px;
         }
         
-        .invite-details {
-            font-family: 'Nunito', sans-serif;
-            color: #4a3728;
-            font-size: 1.3rem;
-            line-height: 2;
-        }
-        
-        .invite-details .label {
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--cosmic-orange), var(--cosmic-gold));
+            border: none;
+            border-radius: 12px;
+            color: var(--cosmic-dark);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
-            color: #8B4513;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .pirate-emoji {
-            font-size: 3rem;
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(240, 160, 48, 0.4);
+        }
+        
+        .success-message {
+            display: none;
             text-align: center;
-            margin: 20px 0;
+            padding: 40px;
         }
         
-        .treasure-chest {
-            text-align: center;
-            margin: 30px 0;
-            font-size: 5rem;
-            animation: wiggle 1s ease-in-out infinite;
+        .success-message h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--cosmic-gold);
+            font-size: 1.5rem;
+            margin: 15px 0;
         }
         
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+        .success-message p {
+            color: var(--text-secondary);
         }
         
-        .rsvp-btn {
-            display: block;
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            border: 4px solid #8B4513;
-            border-radius: 15px;
-            font-family: 'Pirata One', cursive;
-            font-size: 1.8rem;
-            color: #4a3728;
+        .ship-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: rgba(107, 63, 160, 0.3);
+            border: 1px solid var(--cosmic-violet);
+            border-radius: 50px;
+            color: var(--text-primary);
             text-decoration: none;
-            text-align: center;
-            transition: transform 0.3s;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
         
-        .rsvp-btn:hover {
-            transform: scale(1.05);
-        }
-        
-        .ship {
-            font-size: 6rem;
-            text-align: center;
-            animation: sail 4s ease-in-out infinite;
-        }
-        
-        @keyframes sail {
-            0%, 100% { transform: translateX(-20px) rotate(-2deg); }
-            50% { transform: translateX(20px) rotate(2deg); }
+        .ship-link:hover {
+            background: rgba(107, 63, 160, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
+    <div class="stars-bg"></div>
+    
+    <a href="index.html" class="back-btn">← Mission Control</a>
+    
+    <section class="hero-section">
+        <span class="mission-badge">Mission Briefing</span>
+        <h1 class="pirate-title">Ahoy, Matey!</h1>
+        <p class="tagline">Ye be invited to a pirate adventure</p>
+    </section>
+    
     <div class="container">
-        <a href="index.html" class="back-btn">🏠 Back Home</a>
-        
-        <header class="page-header">
-            <h1 class="pirate-title">🏴‍☠️ Ahoy, Matey! 🏴‍☠️</h1>
-            <p class="tagline" style="color: #FFD700;">Ye Be Invited to a Pirate Adventure!</p>
-        </header>
-
-        <div class="ship">⛵</div>
-
         <div class="invite-card">
-            <h2>Captain Ford's 5th Birthday!</h2>
+            <h2>⚓ Captain Ford's 5th Birthday ⚓</h2>
             
-            <div class="pirate-emoji">🏴‍☠️ ⚓ 🦜</div>
-            
-            <div class="invite-details">
-                <p><span class="label">📅 When:</span> March 29th, 2026</p>
-                <p><span class="label">⏰ Time:</span> 11:15 AM Check-in</p>
-                <p><span class="label">📍 Where:</span> Pirates of Charleston!</p>
-                <p><span class="label">🗺️ Meet:</span> Yellow Pirate Cruise sign at La Quinta Hotel</p>
-                <p style="font-size: 1rem; color: #666;">(11 Ashley Point Drive, Charleston)</p>
-                <p><span class="label">👗 Dress Code:</span> Pirate Costumes Welcome!</p>
+            <div class="detail-grid">
+                <div class="detail-row">
+                    <span class="detail-icon">📅</span>
+                    <div class="detail-content">
+                        <div class="detail-label">Launch Date</div>
+                        <div class="detail-value">Saturday, March 29th, 2026</div>
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-icon">⏰</span>
+                    <div class="detail-content">
+                        <div class="detail-label">Check-in Time</div>
+                        <div class="detail-value">11:15 AM</div>
+                        <div class="detail-note">Arrive before the ship departs</div>
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-icon">⛵</span>
+                    <div class="detail-content">
+                        <div class="detail-label">Destination</div>
+                        <div class="detail-value">Pirates of Charleston Cruise</div>
+                        <a href="https://piratesofcharleston.com/" target="_blank" class="ship-link">
+                            View the Ship →
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-icon">📍</span>
+                    <div class="detail-content">
+                        <div class="detail-label">Meeting Point</div>
+                        <div class="detail-value">Yellow Pirate Cruise Sign</div>
+                        <div class="detail-note">La Quinta Hotel — 11 Ashley Point Drive, Charleston</div>
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-icon">👗</span>
+                    <div class="detail-content">
+                        <div class="detail-label">Dress Code</div>
+                        <div class="detail-value">Pirate Costumes Welcome!</div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="treasure-chest">🎁</div>
-            
-            <p style="text-align: center; color: #8B4513; font-style: italic;">
-                Join us for treasure hunts, pirate games, and lots of fun!
-            </p>
-            
-            <a href="#rsvp" class="rsvp-btn">
-                ⚓ RSVP for the Adventure! ⚓
-            </a>
-        </div>
-
-        <div class="content-card" style="text-align: center;">
-            <h2>🗺️ What to Expect</h2>
-            <p style="font-size: 1.5rem; line-height: 2;">
-                ⛵ Real Pirate Ship Cruise!<br>
-                🏴‍☠️ Pirate Games & Adventures<br>
-                🗺️ Treasure Hunt<br>
-                🎂 Birthday Cake<br>
-                🎈 Lots of Fun!
-            </p>
-            <a href="https://piratesofcharleston.com/" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #8B4513; color: #FFD700; border-radius: 10px; text-decoration: none; font-family: 'Pirata One', cursive; font-size: 1.2rem;">
-                ⚓ See the Pirate Ship! ⚓
-            </a>
         </div>
         
-        <div class="invite-card" style="background: linear-gradient(135deg, #1a365d, #2c5282); border-color: #FFD700;">
-            <h2 style="color: #FFD700;">📜 Message for Parents 📜</h2>
-            <div class="invite-details" style="color: #e2e8f0;">
-                <p>🧃 <strong>Drinks:</strong> Juice and water be provided for the young pirates!</p>
-                <p>🍺 <strong>Adults:</strong> Bring yer own beverages — ye be welcome aboard!</p>
-                <p>📍 <strong>Meet Us:</strong> Yellow Pirate Cruise sign in front o' the La Quinta hotel</p>
-                <p>🗺️ <strong>Address:</strong> 11 Ashley Point Drive, Charleston</p>
-                <p>⏰ <strong>Check-in:</strong> 11:15 AM before the ship departs</p>
-                <p>🚗 <strong>Parking:</strong> Free parkin' awaits at the marina!</p>
-            </div>
+        <div class="invite-card parent-info">
+            <h2>📋 PARENT INTEL</h2>
+            <ul class="parent-list">
+                <li><span>🧃</span><span><strong>Drinks:</strong> Juice and water provided for young pirates</span></li>
+                <li><span>🍺</span><span><strong>Adults:</strong> Bring your own beverages — welcome aboard!</span></li>
+                <li><span>🚗</span><span><strong>Parking:</strong> Free parking at the marina</span></li>
+                <li><span>⏰</span><span><strong>Duration:</strong> Cruise is approximately 2 hours</span></li>
+            </ul>
         </div>
-
-        <!-- RSVP Form -->
-        <div class="invite-card" id="rsvp" style="background: linear-gradient(135deg, #f4e4bc 0%, #e8d5a3 100%);">
-            <h2 style="color: #8B4513;">⚓ RSVP Here! ⚓</h2>
-            <p style="text-align: center; color: #5c3317; margin-bottom: 20px;">Please respond by March 22nd</p>
+        
+        <div class="rsvp-section" id="rsvp">
+            <h2>⚓ RSVP</h2>
+            <p class="rsvp-deadline">Please respond by March 22nd</p>
             
-            <form id="rsvpForm" action="https://formspree.io/f/xaqdypeq" method="POST" style="max-width: 400px; margin: 0 auto;">
+            <form id="rsvpForm" action="https://formspree.io/f/xaqdypeq" method="POST">
                 <input type="hidden" name="_subject" value="🏴‍☠️ RSVP for Ford's Pirate Party!">
                 <input type="hidden" name="form_type" value="RSVP">
                 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Parent's Name</label>
-                    <input type="text" name="parent_name" required style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
+                <div class="form-group">
+                    <label>Parent's Name</label>
+                    <input type="text" name="parent_name" required placeholder="Your name">
                 </div>
                 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Child's Name</label>
-                    <input type="text" name="child_name" required style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
+                <div class="form-group">
+                    <label>Child's Name</label>
+                    <input type="text" name="child_name" required placeholder="Your child's name">
                 </div>
                 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Will ye be joining us?</label>
-                    <select name="attending" required style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
-                        <option value="">Select...</option>
-                        <option value="yes">Aye! We'll be there! 🏴‍☠️</option>
-                        <option value="no">Nay, we can't make it 😢</option>
+                <div class="form-group">
+                    <label>Attending?</label>
+                    <select name="attending" required>
+                        <option value="">Select response...</option>
+                        <option value="yes">Yes — We'll be there!</option>
+                        <option value="no">No — Can't make it</option>
                     </select>
                 </div>
                 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">How many pirates? (kids + adults)</label>
-                    <input type="number" name="guest_count" min="1" max="10" placeholder="e.g. 3" style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif;">
+                <div class="form-group">
+                    <label>Total Guests (kids + adults)</label>
+                    <input type="number" name="guest_count" min="1" max="10" placeholder="e.g. 3">
                 </div>
                 
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.2rem; margin-bottom: 5px;">Any allergies or notes?</label>
-                    <textarea name="notes" rows="3" placeholder="Optional - let us know!" style="width: 100%; padding: 12px; border: 3px solid #8B4513; border-radius: 10px; font-size: 1rem; font-family: 'Nunito', sans-serif; resize: vertical;"></textarea>
+                <div class="form-group">
+                    <label>Allergies or Notes</label>
+                    <textarea name="notes" rows="3" placeholder="Optional — anything we should know?"></textarea>
                 </div>
                 
-                <button type="submit" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #FFD700, #FFA500); border: 4px solid #8B4513; border-radius: 15px; font-family: 'Pirata One', cursive; font-size: 1.5rem; color: #4a3728; cursor: pointer; transition: transform 0.3s;">
-                    🏴‍☠️ Send RSVP! 🏴‍☠️
-                </button>
+                <button type="submit" class="submit-btn">Submit RSVP →</button>
             </form>
             
-            <div id="rsvpSuccess" style="display: none; text-align: center; padding: 30px;">
-                <div style="font-size: 4rem;">🎉</div>
-                <h3 style="font-family: 'Pirata One', cursive; color: #8B4513; font-size: 1.8rem;">Thanks, Matey!</h3>
-                <p style="color: #5c3317;">We got yer RSVP. See ye on the ship!</p>
+            <div id="rsvpSuccess" class="success-message">
+                <div style="font-size: 3rem;">🎉</div>
+                <h3>RSVP Received!</h3>
+                <p>Thanks, matey! See you on the ship.</p>
             </div>
         </div>
-
-        <footer>
-            <p style="color: #FFD700;">⚓ Set Sail for Fun! ⚓</p>
-        </footer>
     </div>
-
-    <script src="js/sparkles.js"></script>
+    
+    <footer>
+        <p>⚓ Set Sail for Adventure ⚓</p>
+    </footer>
+    
     <script>
         const form = document.getElementById('rsvpForm');
         const successMsg = document.getElementById('rsvpSuccess');
@@ -262,10 +383,10 @@
                     form.style.display = 'none';
                     successMsg.style.display = 'block';
                 } else {
-                    alert('Arrr! Something went wrong. Try again, matey!');
+                    alert('Something went wrong. Please try again.');
                 }
             } catch (error) {
-                alert('Arrr! Something went wrong. Try again, matey!');
+                alert('Something went wrong. Please try again.');
             }
         });
     </script>

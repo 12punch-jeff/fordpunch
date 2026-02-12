@@ -3,73 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ford's World! 🏴‍☠️</title>
+    <title>Ford Punch — Explorer</title>
     
     <!-- Social Media Preview -->
-    <meta property="og:title" content="Ford's World! 🏴‍☠️">
-    <meta property="og:description" content="Welcome to Ford's awesome website! Games, photos, music, and more!">
-    <meta property="og:image" content="https://fordpunch.com/images/ford-busy-bug.jpg">
+    <meta property="og:title" content="Ford Punch — Explorer">
+    <meta property="og:description" content="Welcome to Ford's universe. Games, art, music, and adventures await.">
+    <meta property="og:image" content="https://fordpunch.com/images/hero-bg.jpg">
     <meta property="og:url" content="https://fordpunch.com">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ford's World! 🏴‍☠️">
-    <meta name="twitter:description" content="Welcome to Ford's awesome website! Games, photos, music, and more!">
-    <meta name="twitter:image" content="https://fordpunch.com/images/ford-busy-bug.jpg">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="twitter:title" content="Ford Punch — Explorer">
+    <meta name="twitter:description" content="Welcome to Ford's universe. Games, art, music, and adventures await.">
+    <meta name="twitter:image" content="https://fordpunch.com/images/hero-bg.jpg">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cosmic-dark: #0a0a0f;
+            --cosmic-purple: #2d1b4e;
+            --cosmic-violet: #6b3fa0;
+            --cosmic-orange: #e07020;
+            --cosmic-gold: #f0a030;
+            --cosmic-pink: #c060a0;
+            --star-white: #ffffff;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --glass-bg: rgba(15, 10, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cosmic-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/hero-bg.jpg') center center / cover no-repeat;
+            z-index: 0;
+        }
+        
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 10, 15, 0.3) 0%,
+                rgba(10, 10, 15, 0.1) 40%,
+                rgba(10, 10, 15, 0.6) 80%,
+                rgba(10, 10, 15, 1) 100%
+            );
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin-top: auto;
+            padding-bottom: 60px;
+        }
+        
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--star-white) 0%, var(--cosmic-gold) 50%, var(--cosmic-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-shadow: 0 0 60px rgba(240, 160, 48, 0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .scroll-indicator span {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid var(--cosmic-gold);
+            border-bottom: 2px solid var(--cosmic-gold);
+            transform: rotate(45deg);
+            opacity: 0.6;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        /* Navigation Grid */
+        .nav-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--cosmic-gold);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .nav-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(107, 63, 160, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cosmic-violet);
+            box-shadow: 
+                0 20px 40px rgba(107, 63, 160, 0.2),
+                0 0 60px rgba(107, 63, 160, 0.1);
+        }
+        
+        .nav-card:hover::before {
+            opacity: 1;
+        }
+        
+        .nav-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .nav-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        
+        .nav-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .nav-card.featured {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(224, 112, 32, 0.15) 0%, rgba(45, 27, 78, 0.3) 100%);
+            border-color: rgba(224, 112, 32, 0.3);
+        }
+        
+        .nav-card.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+        
+        .footer-name {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--cosmic-gold);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-card.featured {
+                grid-column: span 1;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 0.2em;
+            }
+        }
+        
+        /* Stars animation */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="container">
-        <header>
-            <img src="images/ford-busy-bug.jpg" alt="Ford" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 20px;">
-            <h1>🏴‍☠️ Ford's World! 🏴‍☠️</h1>
-            <p class="tagline">Welcome to my awesome website!</p>
-        </header>
-
-        <nav class="main-nav">
-            <a href="party.html" class="nav-card party">
-                <span class="emoji">🎂</span>
-                <span class="label">Party!</span>
+    <div class="stars" id="stars"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Ford Punch</h1>
+            <p class="hero-subtitle">Explorer • Creator • Adventurer</p>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+    
+    <!-- Navigation Section -->
+    <section class="nav-section">
+        <h2 class="section-title">Mission Control</h2>
+        
+        <div class="nav-grid">
+            <a href="party.html" class="nav-card featured">
+                <span class="nav-card-icon">🚀</span>
+                <h3 class="nav-card-title">Birthday Launch</h3>
+                <p class="nav-card-desc">Captain Ford's 5th birthday pirate adventure. Join the crew on March 29th for an epic voyage.</p>
             </a>
-            <a href="games.html" class="nav-card games">
-                <span class="emoji">🎮</span>
-                <span class="label">Games</span>
+            
+            <a href="games.html" class="nav-card">
+                <span class="nav-card-icon">🎮</span>
+                <h3 class="nav-card-title">Game Station</h3>
+                <p class="nav-card-desc">Test your skills with memory challenges, reaction games, and more.</p>
             </a>
-            <a href="typing.html" class="nav-card typing">
-                <span class="emoji">⌨️</span>
-                <span class="label">Learn to Type</span>
+            
+            <a href="typing.html" class="nav-card">
+                <span class="nav-card-icon">⌨️</span>
+                <h3 class="nav-card-title">Command Training</h3>
+                <p class="nav-card-desc">Master the keyboard. Essential skills for any space explorer.</p>
             </a>
-            <a href="photos.html" class="nav-card photos">
-                <span class="emoji">📸</span>
-                <span class="label">Photos</span>
+            
+            <a href="photos.html" class="nav-card">
+                <span class="nav-card-icon">📸</span>
+                <h3 class="nav-card-title">Mission Log</h3>
+                <p class="nav-card-desc">Photo documentation of adventures across Earth and beyond.</p>
             </a>
-            <a href="videos.html" class="nav-card videos">
-                <span class="emoji">🎬</span>
-                <span class="label">Videos</span>
+            
+            <a href="art.html" class="nav-card">
+                <span class="nav-card-icon">🎨</span>
+                <h3 class="nav-card-title">Art Gallery</h3>
+                <p class="nav-card-desc">Original artwork available for collectors. Each piece is one-of-a-kind.</p>
             </a>
-            <a href="art.html" class="nav-card art">
-                <span class="emoji">🎨</span>
-                <span class="label">My Art</span>
+            
+            <a href="music.html" class="nav-card">
+                <span class="nav-card-icon">🎵</span>
+                <h3 class="nav-card-title">Sound Station</h3>
+                <p class="nav-card-desc">The official soundtrack for interstellar adventures.</p>
             </a>
-            <a href="music.html" class="nav-card music">
-                <span class="emoji">🎵</span>
-                <span class="label">Music</span>
+            
+            <a href="messages.html" class="nav-card">
+                <span class="nav-card-icon">💬</span>
+                <h3 class="nav-card-title">Transmissions</h3>
+                <p class="nav-card-desc">Send a message to Ford. Communications from across the galaxy welcome.</p>
             </a>
-            <a href="messages.html" class="nav-card" style="background: linear-gradient(135deg, #f472b6, #ec4899);">
-                <span class="emoji">💌</span>
-                <span class="label">Messages</span>
+            
+            <a href="#" class="nav-card disabled">
+                <span class="nav-card-icon">🎬</span>
+                <h3 class="nav-card-title">Video Archive</h3>
+                <p class="nav-card-desc">Coming soon — mission recordings and adventure footage.</p>
             </a>
-        </nav>
-
-        <footer>
-            <p>Made with ❤️ by Ford Punch</p>
-        </footer>
-    </div>
-
-    <script src="js/sparkles.js"></script>
+        </div>
+    </section>
+    
+    <footer>
+        <p class="footer-text">© 2026 <span class="footer-name">Ford Punch</span> — All Rights Reserved Across the Universe</p>
+    </footer>
+    
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+            starsContainer.appendChild(star);
+        }
+    </script>
 </body>
 </html>
