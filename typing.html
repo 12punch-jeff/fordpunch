@@ -3,121 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⌨️ Learn to Type with Ford!</title>
+    <title>Command Training — Ford Punch</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(34, 197, 94, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(45, 27, 78, 0.4) 0%, transparent 50%),
+                var(--cosmic-dark);
         }
         
         .game-area {
-            background: rgba(255,255,255,0.95);
-            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
             padding: 40px;
             max-width: 900px;
             margin: 20px auto;
-            text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
-        .target-letter {
-            font-family: 'Fredoka One', cursive;
-            font-size: 12rem;
-            color: #22c55e;
-            text-shadow: 4px 4px 0 #166534;
-            animation: pulse 1s ease-in-out infinite;
-            margin: 20px 0;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .target-word {
-            font-family: 'Nunito', sans-serif;
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 30px;
-        }
-        
-        .target-word .highlight {
-            color: #22c55e;
-            font-weight: 700;
-            text-decoration: underline;
-        }
-        
-        .keyboard {
+        .mode-buttons {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            margin-top: 30px;
-        }
-        
-        .keyboard-row {
-            display: flex;
-            gap: 6px;
-        }
-        
-        .key {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #e5e5e5, #d4d4d4);
-            border: 3px solid #a3a3a3;
-            border-radius: 10px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.5rem;
-            color: #333;
-            display: flex;
-            align-items: center;
             justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .mode-btn {
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.1s;
-            box-shadow: 0 4px 0 #737373;
+            transition: all 0.3s;
         }
         
-        .key:hover {
-            background: linear-gradient(135deg, #fef08a, #fde047);
+        .mode-btn:hover {
+            border-color: var(--cosmic-violet);
+            color: var(--text-primary);
         }
         
-        .key.target {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            border-color: #166534;
-            color: white;
-            animation: glow 1s ease-in-out infinite;
-            box-shadow: 0 4px 0 #166534, 0 0 20px #22c55e;
-        }
-        
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 4px 0 #166534, 0 0 20px #22c55e; }
-            50% { box-shadow: 0 4px 0 #166534, 0 0 40px #22c55e; }
-        }
-        
-        .key.pressed {
-            transform: translateY(4px);
-            box-shadow: 0 0 0 #737373;
-        }
-        
-        .key.correct {
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            animation: celebrate 0.5s ease-out;
-        }
-        
-        @keyframes celebrate {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-        
-        .key.space {
-            width: 300px;
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--cosmic-orange), var(--cosmic-gold));
+            color: var(--cosmic-dark);
+            border-color: transparent;
         }
         
         .score-board {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 50px;
             margin: 20px 0;
         }
         
@@ -126,227 +80,248 @@
         }
         
         .score-item .label {
-            font-family: 'Nunito', sans-serif;
-            font-size: 1rem;
-            color: #666;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
         
         .score-item .value {
-            font-family: 'Fredoka One', cursive;
-            font-size: 2.5rem;
-            color: #22c55e;
-        }
-        
-        .mode-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .mode-btn {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 50px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .mode-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .mode-btn.active {
-            box-shadow: 0 0 0 4px #22c55e;
-        }
-        
-        .mode-btn.letters { background: #fef08a; color: #854d0e; }
-        .mode-btn.words { background: #a5f3fc; color: #0e7490; }
-        .mode-btn.sentences { background: #fecaca; color: #991b1b; }
-        
-        .celebration {
-            font-size: 4rem;
-            animation: pop 0.5s ease-out;
-        }
-        
-        @keyframes pop {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .hint {
-            font-size: 1.2rem;
-            color: #666;
-            margin-top: 20px;
-            font-style: italic;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--cosmic-gold);
         }
         
         .progress-bar {
             width: 100%;
-            height: 20px;
-            background: #e5e5e5;
-            border-radius: 10px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
             overflow: hidden;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #22c55e, #4ade80);
+            background: linear-gradient(90deg, var(--cosmic-violet), var(--cosmic-gold));
             transition: width 0.3s;
+            border-radius: 3px;
+        }
+        
+        .target-display {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .target-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10rem;
+            font-weight: 900;
+            color: var(--cosmic-gold);
+            text-shadow: 0 0 60px rgba(240, 160, 48, 0.5);
+            line-height: 1;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        
+        .target-word {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            margin-top: 20px;
+        }
+        
+        .target-word .highlight {
+            color: var(--cosmic-gold);
+            font-weight: 700;
+        }
+        
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+        }
+        
+        .keyboard-row {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .key {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .key:hover {
+            border-color: var(--cosmic-violet);
+            color: var(--text-primary);
+        }
+        
+        .key.target {
+            background: linear-gradient(135deg, var(--cosmic-violet), var(--cosmic-purple));
+            border-color: var(--cosmic-violet);
+            color: var(--star-white);
+            box-shadow: 0 0 30px rgba(107, 63, 160, 0.5);
+            animation: glow 1s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(107, 63, 160, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(107, 63, 160, 0.8); }
+        }
+        
+        .key.pressed {
+            transform: scale(0.95);
+        }
+        
+        .key.correct {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-color: #22c55e;
+            color: white;
+        }
+        
+        .key.space {
+            width: 250px;
+        }
+        
+        .celebration {
+            font-size: 4rem;
+            text-align: center;
+            animation: pop 0.5s ease-out;
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .hint {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 25px;
+        }
+        
+        @media (max-width: 600px) {
+            .key { width: 32px; height: 40px; font-size: 0.8rem; }
+            .key.space { width: 150px; }
+            .target-letter { font-size: 6rem; }
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="container">
-        <a href="index.html" class="back-btn">🏠 Back Home</a>
-        
-        <header class="page-header">
-            <h1>⌨️ Learn to Type! ⌨️</h1>
-            <p class="tagline">Find the letter and press it!</p>
-        </header>
-
-        <div class="game-area">
-            <div class="mode-buttons">
-                <button class="mode-btn letters active" onclick="setMode('letters')">🔤 Letters</button>
-                <button class="mode-btn words" onclick="setMode('words')">📝 Words</button>
-                <button class="mode-btn sentences" onclick="setMode('sentences')">📖 Sentences</button>
-            </div>
-            
-            <div class="score-board">
-                <div class="score-item">
-                    <div class="label">Score</div>
-                    <div class="value" id="score">0</div>
-                </div>
-                <div class="score-item">
-                    <div class="label">Streak</div>
-                    <div class="value" id="streak">0 🔥</div>
-                </div>
-            </div>
-            
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress" style="width: 0%"></div>
-            </div>
-            
-            <div id="target-display">
-                <div class="target-letter" id="targetLetter">A</div>
-                <div class="target-word" id="targetWord">Press the letter <span class="highlight">A</span>!</div>
-            </div>
-            
-            <div id="celebration" class="celebration" style="display: none;"></div>
-            
-            <div class="keyboard" id="keyboard">
-                <div class="keyboard-row">
-                    <div class="key" data-key="Q">Q</div>
-                    <div class="key" data-key="W">W</div>
-                    <div class="key" data-key="E">E</div>
-                    <div class="key" data-key="R">R</div>
-                    <div class="key" data-key="T">T</div>
-                    <div class="key" data-key="Y">Y</div>
-                    <div class="key" data-key="U">U</div>
-                    <div class="key" data-key="I">I</div>
-                    <div class="key" data-key="O">O</div>
-                    <div class="key" data-key="P">P</div>
-                </div>
-                <div class="keyboard-row">
-                    <div class="key" data-key="A">A</div>
-                    <div class="key" data-key="S">S</div>
-                    <div class="key" data-key="D">D</div>
-                    <div class="key" data-key="F">F</div>
-                    <div class="key" data-key="G">G</div>
-                    <div class="key" data-key="H">H</div>
-                    <div class="key" data-key="J">J</div>
-                    <div class="key" data-key="K">K</div>
-                    <div class="key" data-key="L">L</div>
-                </div>
-                <div class="keyboard-row">
-                    <div class="key" data-key="Z">Z</div>
-                    <div class="key" data-key="X">X</div>
-                    <div class="key" data-key="C">C</div>
-                    <div class="key" data-key="V">V</div>
-                    <div class="key" data-key="B">B</div>
-                    <div class="key" data-key="N">N</div>
-                    <div class="key" data-key="M">M</div>
-                </div>
-                <div class="keyboard-row">
-                    <div class="key space" data-key=" ">SPACE</div>
-                </div>
-            </div>
-            
-            <p class="hint" id="hint">💡 Look at the glowing key!</p>
+    <div class="stars-bg"></div>
+    
+    <a href="index.html" class="back-btn">← Mission Control</a>
+    
+    <header class="page-header">
+        <h1>Command Training</h1>
+        <p class="tagline">Master the Keyboard</p>
+    </header>
+    
+    <div class="game-area">
+        <div class="mode-buttons">
+            <button class="mode-btn active" onclick="setMode('letters')">Letters</button>
+            <button class="mode-btn" onclick="setMode('words')">Words</button>
+            <button class="mode-btn" onclick="setMode('sentences')">Sentences</button>
         </div>
-
-        <footer>
-            <p>Great job learning to type! 🌟</p>
-        </footer>
+        
+        <div class="score-board">
+            <div class="score-item">
+                <div class="label">Score</div>
+                <div class="value" id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div class="label">Streak</div>
+                <div class="value" id="streak">0</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+        
+        <div class="target-display" id="target-display">
+            <div class="target-letter" id="targetLetter">A</div>
+            <div class="target-word" id="targetWord">Press <span class="highlight">A</span></div>
+        </div>
+        
+        <div id="celebration" class="celebration" style="display: none;"></div>
+        
+        <div class="keyboard" id="keyboard">
+            <div class="keyboard-row">
+                <div class="key" data-key="Q">Q</div>
+                <div class="key" data-key="W">W</div>
+                <div class="key" data-key="E">E</div>
+                <div class="key" data-key="R">R</div>
+                <div class="key" data-key="T">T</div>
+                <div class="key" data-key="Y">Y</div>
+                <div class="key" data-key="U">U</div>
+                <div class="key" data-key="I">I</div>
+                <div class="key" data-key="O">O</div>
+                <div class="key" data-key="P">P</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="key" data-key="A">A</div>
+                <div class="key" data-key="S">S</div>
+                <div class="key" data-key="D">D</div>
+                <div class="key" data-key="F">F</div>
+                <div class="key" data-key="G">G</div>
+                <div class="key" data-key="H">H</div>
+                <div class="key" data-key="J">J</div>
+                <div class="key" data-key="K">K</div>
+                <div class="key" data-key="L">L</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="key" data-key="Z">Z</div>
+                <div class="key" data-key="X">X</div>
+                <div class="key" data-key="C">C</div>
+                <div class="key" data-key="V">V</div>
+                <div class="key" data-key="B">B</div>
+                <div class="key" data-key="N">N</div>
+                <div class="key" data-key="M">M</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="key space" data-key=" ">SPACE</div>
+            </div>
+        </div>
+        
+        <p class="hint" id="hint">Find the glowing key!</p>
     </div>
-
-    <script src="js/sparkles.js"></script>
+    
+    <footer>
+        <p>Keep practicing, Commander</p>
+    </footer>
+    
     <script>
-        // Game state
-        let score = 0;
-        let streak = 0;
-        let mode = 'letters';
-        let currentTarget = '';
-        let currentIndex = 0;
-        let progress = 0;
+        let score = 0, streak = 0, mode = 'letters', currentTarget = '', currentIndex = 0, progress = 0;
         
-        // Word lists (kid-friendly)
-        const words = [
-            'CAT', 'DOG', 'SUN', 'MOM', 'DAD', 'HAT', 'BAT', 'RAT', 'CAR', 'BUS',
-            'RUN', 'FUN', 'BIG', 'RED', 'BLUE', 'FISH', 'BIRD', 'TREE', 'STAR', 'MOON',
-            'FORD', 'LOVE', 'PLAY', 'JUMP', 'SKIP', 'BALL', 'BOOK', 'CAKE', 'GAME', 'HOME'
-        ];
+        const words = ['CAT', 'DOG', 'SUN', 'MOM', 'DAD', 'HAT', 'BAT', 'RAT', 'CAR', 'BUS',
+            'RUN', 'FUN', 'BIG', 'RED', 'FORD', 'LOVE', 'PLAY', 'JUMP', 'STAR', 'MOON'];
         
-        const sentences = [
-            'I LOVE MOM',
-            'THE CAT RAN',
-            'A BIG DOG',
-            'I CAN RUN',
-            'THE SUN IS UP',
-            'I LIKE CAKE',
-            'PLAY WITH ME',
-            'FORD IS FUN'
-        ];
+        const sentences = ['I LOVE MOM', 'THE CAT RAN', 'A BIG DOG', 'I CAN RUN', 'FORD IS FUN'];
         
-        // Sound effects (using Web Audio API)
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        
-        function playSound(freq, duration) {
-            const osc = audioContext.createOscillator();
-            const gain = audioContext.createGain();
-            osc.connect(gain);
-            gain.connect(audioContext.destination);
-            osc.frequency.value = freq;
-            osc.type = 'sine';
-            gain.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-            osc.start();
-            osc.stop(audioContext.currentTime + duration);
-        }
-        
-        function playCorrect() {
-            playSound(523.25, 0.1); // C5
-            setTimeout(() => playSound(659.25, 0.1), 100); // E5
-            setTimeout(() => playSound(783.99, 0.2), 200); // G5
-        }
-        
-        function playWrong() {
-            playSound(200, 0.3);
-        }
-        
-        function playCelebration() {
-            [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-                setTimeout(() => playSound(freq, 0.15), i * 100);
-            });
-        }
-        
-        // Get all keys
         const keys = document.querySelectorAll('.key');
         const targetLetter = document.getElementById('targetLetter');
         const targetWord = document.getElementById('targetWord');
@@ -360,35 +335,29 @@
             mode = newMode;
             currentIndex = 0;
             progress = 0;
-            
-            // Update buttons
             document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.classList.contains(newMode)) btn.classList.add('active');
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === newMode);
             });
-            
             nextTarget();
         }
         
         function nextTarget() {
-            // Clear previous target highlighting
             keys.forEach(k => k.classList.remove('target'));
             
             if (mode === 'letters') {
                 currentTarget = String.fromCharCode(65 + Math.floor(Math.random() * 26));
                 targetLetter.textContent = currentTarget;
-                targetWord.innerHTML = `Press the letter <span class="highlight">${currentTarget}</span>!`;
-                hintEl.textContent = `💡 Find the ${currentTarget} key!`;
+                targetWord.innerHTML = `Press <span class="highlight">${currentTarget}</span>`;
+                hintEl.textContent = `Find ${currentTarget}`;
             } else if (mode === 'words') {
                 currentTarget = words[Math.floor(Math.random() * words.length)];
                 currentIndex = 0;
                 updateWordDisplay();
-            } else if (mode === 'sentences') {
+            } else {
                 currentTarget = sentences[Math.floor(Math.random() * sentences.length)];
                 currentIndex = 0;
                 updateWordDisplay();
             }
-            
             highlightTargetKey();
         }
         
@@ -398,24 +367,18 @@
             
             let display = '';
             for (let i = 0; i < currentTarget.length; i++) {
-                if (i < currentIndex) {
-                    display += `<span style="color: #22c55e;">${currentTarget[i]}</span>`;
-                } else if (i === currentIndex) {
-                    display += `<span class="highlight">${currentTarget[i] === ' ' ? '␣' : currentTarget[i]}</span>`;
-                } else {
-                    display += currentTarget[i];
-                }
+                if (i < currentIndex) display += `<span style="color: var(--cosmic-gold);">${currentTarget[i]}</span>`;
+                else if (i === currentIndex) display += `<span class="highlight">${currentTarget[i] === ' ' ? '␣' : currentTarget[i]}</span>`;
+                else display += currentTarget[i];
             }
             targetWord.innerHTML = display;
-            hintEl.textContent = currentTarget[currentIndex] === ' ' ? '💡 Press SPACE!' : `💡 Find the ${currentTarget[currentIndex]} key!`;
+            hintEl.textContent = currentTarget[currentIndex] === ' ' ? 'Press SPACE' : `Find ${currentTarget[currentIndex]}`;
         }
         
         function highlightTargetKey() {
             const target = mode === 'letters' ? currentTarget : currentTarget[currentIndex];
             keys.forEach(key => {
-                if (key.dataset.key === target) {
-                    key.classList.add('target');
-                }
+                if (key.dataset.key === target) key.classList.add('target');
             });
         }
         
@@ -423,9 +386,6 @@
             const target = mode === 'letters' ? currentTarget : currentTarget[currentIndex];
             
             if (pressedKey === target) {
-                // Correct!
-                playCorrect();
-                
                 const keyEl = document.querySelector(`.key[data-key="${pressedKey}"]`);
                 if (keyEl) {
                     keyEl.classList.add('correct');
@@ -436,48 +396,37 @@
                     score += 10;
                     streak++;
                     progress = Math.min(100, progress + 10);
-                    
-                    if (progress >= 100) {
-                        celebrate();
-                        progress = 0;
-                    }
-                    
-                    setTimeout(nextTarget, 500);
+                    if (progress >= 100) { celebrate(); progress = 0; }
+                    setTimeout(nextTarget, 400);
                 } else {
                     currentIndex++;
                     progress = (currentIndex / currentTarget.length) * 100;
-                    
                     if (currentIndex >= currentTarget.length) {
-                        // Word/sentence complete!
                         score += currentTarget.length * 5;
                         streak++;
                         celebrate();
-                        setTimeout(nextTarget, 1500);
+                        setTimeout(nextTarget, 1200);
                     } else {
                         updateWordDisplay();
                         highlightTargetKey();
                     }
                 }
             } else {
-                // Wrong
-                playWrong();
                 streak = 0;
             }
             
             scoreEl.textContent = score;
-            streakEl.textContent = streak + ' 🔥';
+            streakEl.textContent = streak;
             progressEl.style.width = progress + '%';
         }
         
         function celebrate() {
-            playCelebration();
-            const emojis = ['🎉', '⭐', '🌟', '🎊', '✨', '🏆', '👏', '💯'];
+            const emojis = ['🎉', '⭐', '🚀', '🌟', '✨', '🏆'];
             celebrationEl.textContent = emojis[Math.floor(Math.random() * emojis.length)];
             celebrationEl.style.display = 'block';
-            setTimeout(() => celebrationEl.style.display = 'none', 1000);
+            setTimeout(() => celebrationEl.style.display = 'none', 800);
         }
         
-        // Click handling for on-screen keyboard
         keys.forEach(key => {
             key.addEventListener('click', () => {
                 key.classList.add('pressed');
@@ -486,11 +435,9 @@
             });
         });
         
-        // Physical keyboard handling
         document.addEventListener('keydown', (e) => {
             const pressedKey = e.key.toUpperCase();
             const keyEl = document.querySelector(`.key[data-key="${pressedKey}"]`);
-            
             if (keyEl || e.key === ' ') {
                 e.preventDefault();
                 if (keyEl) {
@@ -501,7 +448,6 @@
             }
         });
         
-        // Initialize
         nextTarget();
     </script>
 </body>
